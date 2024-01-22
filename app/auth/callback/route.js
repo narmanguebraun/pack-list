@@ -13,5 +13,5 @@ export async function GET(req) {
   if (code) {
     await supabase.auth.exchangeCodeForSession(code);
   }
-  return NextResponse.redirect(new URL("pack-list", req.url));
+  return NextResponse.redirect(new URL("/pack-list", req.url));
 }

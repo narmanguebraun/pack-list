@@ -1,3 +1,5 @@
+import { cookies } from "next/headers";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import ItemForm from "@/components/ItemForm";
 import EditItem from "@/components/EditItem";
 
@@ -8,8 +10,25 @@ export type Item = {
   reference: string;
 };
 
-export default function PackList() {
-  const items: Item[] = [];
+export default async function PackList() {
+  const cookieStore = cookies();
+  const supabase = createServerComponentClient({ cookies: () => cookieStore });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const user = session?.user;
+
+  const { data: items, error } = await supabase
+    .from("items")
+    .select("*")
+    .eq("user_id", user?.id)
+    .order("brand", { ascending: true });
+
+  if (error) {
+    console.error("Error fetching items");
+  }
+
+  console.log(items);
 
   return (
     <main className="min-h-screen p-4">

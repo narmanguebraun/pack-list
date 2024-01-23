@@ -9,7 +9,7 @@ export default function Home() {
         items. Sign in to create, view, edit and delete items from your
         pack-list.
       </p>
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+      <div>
         <AuthForm />
       </div>
     </main>

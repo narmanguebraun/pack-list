@@ -1,10 +1,25 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Auth } from "@supabase/auth-ui-react";
+import {
+  // Import predefined theme
+  ThemeSupa,
+} from "@supabase/auth-ui-shared";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function AuthForm() {
   const supabase = createClientComponentClient();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <Auth
       supabaseClient={supabase}
@@ -13,13 +28,7 @@ export default function AuthForm() {
       providers={[]}
       redirectTo="http://localhost:3000/auth/callback"
       appearance={{
-        theme: "dark",
-        button: {
-          className: "bg-white-400 text-gray-900 hover:bg-gray-600",
-        },
-        input: {
-          className: "bg-gray-700 border-gray-600 text-white",
-        },
+        theme: ThemeSupa,
       }}
     />
   );

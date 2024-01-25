@@ -1,8 +1,18 @@
-import { addItem } from "@/app/server-actions/addItem";
+"use client";
+
+import { addItem } from "@/actions/actions";
+import { useRef } from "react";
 
 export default function ItemForm() {
+  const ref = useRef<HTMLFormElement>(null);
   return (
-    <form action={addItem}>
+    <form
+      ref={ref}
+      action={async (formData) => {
+        ref.current?.reset();
+        await addItem(formData);
+      }}
+    >
       <div className="flex flex-col gap-2">
         <div className="flex flex-col">
           <label htmlFor="brand">Brand</label>

@@ -1,8 +1,9 @@
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import ItemForm from "@/app/components/ItemForm";
-import EditItem from "@/app/components/EditItem";
-import { deleteItem } from "@/app/server-actions/deleteItem";
+import ItemForm from "@/components/ItemForm";
+import EditItem from "@/components/EditItem";
+import { deleteItem } from "@/actions/actions";
+import { DeleteIcon } from "@/components/ui/Icons";
 
 export type Item = {
   id: number;
@@ -66,9 +67,9 @@ export default async function PackList() {
                 <input type="hidden" name="id" value={item.id} />
                 <button
                   type="submit"
-                  className="border border-cyan-500 bg-cyan-500 text-black hover:bg-black hover:text-cyan-500 uppercase rounded px-2"
+                  className="flex flex-col items-center justify-center hover:text-blue-400"
                 >
-                  Delete
+                  <DeleteIcon />
                 </button>
               </form>
             </div>

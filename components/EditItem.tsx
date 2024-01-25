@@ -1,10 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import { updateItem } from "@/app/server-actions/updateItem";
+import { useState, useRef } from "react";
+import { updateItem } from "@/actions/actions";
 import { EditIcon } from "./ui/Icons";
 
-export default function EditItem({ item }) {
+export type Item = {
+  id: number;
+  brand: string;
+  model: string;
+  reference: string;
+};
+
+interface ItemProps {
+  item: Item;
+}
+
+export default function EditItem({ item }: ItemProps) {
+  const ref = useRef<HTMLFormElement>(null);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     brand: item.brand,
@@ -12,16 +24,16 @@ export default function EditItem({ item }) {
     reference: item.reference,
   });
 
-  const handleChange = (e) =>
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   return (
     <div>
       <button
-        className="border border-cyan-500 bg-cyan-500 text-black hover:bg-black hover:text-cyan-500 uppercase rounded px-2"
         onClick={() => setShowModal(true)}
+        className="flex flex-col items-center justify-center"
       >
-        Modify
+        <EditIcon />
       </button>
 
       {showModal && (
@@ -33,7 +45,15 @@ export default function EditItem({ item }) {
             >
               &times;
             </span>
-            <form action={updateItem} onSubmit={() => setShowModal(false)}>
+
+            <form
+              ref={ref}
+              action={async (formData) => {
+                ref.current?.reset();
+                await updateItem(formData);
+              }}
+              onSubmit={() => setShowModal(false)}
+            >
               <div className="flex flex-col gap-2">
                 <input type="hidden" name="id" value={item.id} />
                 <div className="flex flex-col">

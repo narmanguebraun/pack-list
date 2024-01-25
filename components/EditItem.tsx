@@ -31,7 +31,7 @@ export default function EditItem({ item }: ItemProps) {
     <div>
       <button
         onClick={() => setShowModal(true)}
-        className="flex flex-col items-center justify-center"
+        className="flex flex-col items-center justify-center hover:text-cyan-500"
       >
         <EditIcon />
       </button>

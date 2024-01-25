@@ -33,17 +33,17 @@ export default async function PackList() {
   console.log(items);
 
   return (
-    <main className="min-h-screen p-4 font-mono">
+    <main className="min-h-screen p-4 font-mono max-w-[1440px] m-auto">
       <div className="flex justify-between items-center p-4">
-        <h1>Pack-List</h1>
+        <h1 className="uppercase">Good Bag</h1>
         <div className="flex items-center gap-4">
           {user?.email}
           <form action="/auth/signout" method="post">
             <button
               type="submit"
-              className="border border-white bg-black hover:bg-gray-500 text-white py-1 px-4 rounded"
+              className="border border-cyan-500 bg-cyan-500 hover:border-cyan-500 hover:bg-black hover:text-cyan-500 py-1 px-4 rounded"
             >
-              Sign Out &rarr;
+              Sign Out
             </button>
           </form>
         </div>
@@ -67,7 +67,7 @@ export default async function PackList() {
                 <input type="hidden" name="id" value={item.id} />
                 <button
                   type="submit"
-                  className="flex flex-col items-center justify-center hover:text-blue-400"
+                  className="flex flex-col items-center justify-center hover:text-cyan-500"
                 >
                   <DeleteIcon />
                 </button>

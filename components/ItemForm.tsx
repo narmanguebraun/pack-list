@@ -46,7 +46,7 @@ export default function ItemForm() {
         </div>
         <button
           type="submit"
-          className="mt-6 border border-cyan-500 bg-cyan-500 text-black hover:bg-black hover:text-cyan-500 uppercase rounded py-1 px-4"
+          className="mt-6 border border-cyan-500 bg-cyan-500 text-white hover:bg-black hover:text-cyan-500 uppercase rounded py-1 px-4"
         >
           Add item
         </button>

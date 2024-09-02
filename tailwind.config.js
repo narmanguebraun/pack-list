@@ -6,16 +6,23 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors: {
+      transparent: "transparent",
+      inherit: "inherit",
+      white: "#FFFFFF",
+      black: "#000000",
+      matte: "#141414",
+      dark: "#1e1f21",
+      accent: "#839ee1",
+    },
     fontFamily: {
       sans: ["Inter"],
       mono: ["Courier"],
     },
     fontWeight: {
-      light: "300",
       normal: "400",
       medium: "500",
       semibold: "600",
-      bold: "700",
     },
     letterSpacing: {
       normal: "0",

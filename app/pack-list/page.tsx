@@ -1,16 +1,9 @@
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import ItemForm from "@/components/ItemForm";
-import EditItem from "@/components/EditItem";
-import { deleteItem } from "@/actions/actions";
-import { DeleteIcon } from "@/components/ui/Icons";
 
-export type Item = {
-  id: number;
-  brand: string;
-  model: string;
-  reference: string;
-};
+import CreateItemModal from "@/components/CreateItemModal";
+import Header from "@/components/Header";
+import ItemCard from "@/components/ItemCard";
 
 export default async function PackList() {
   const cookieStore = cookies();
@@ -30,50 +23,13 @@ export default async function PackList() {
     console.error("Error fetching items");
   }
 
-  console.log(items);
-
   return (
-    <main className="min-h-screen p-4 font-mono max-w-[1440px] m-auto">
-      <div className="flex justify-between items-center p-4">
-        <h1 className="uppercase">Good Bag</h1>
-        <div className="flex items-center gap-4">
-          {user?.email}
-          <form action="/auth/signout" method="post">
-            <button
-              type="submit"
-              className="border border-cyan-500 bg-cyan-500 hover:border-cyan-500 hover:bg-black hover:text-cyan-500 py-1 px-4 rounded"
-            >
-              Sign Out
-            </button>
-          </form>
-        </div>
-      </div>
+    <main className="min-h-screen max-w-[1440px] m-auto bg-matte">
+      <Header />
 
-      <div className="p-4">
-        <ItemForm />
-      </div>
-      <div className="p-4 flex flex-col gap-4">
+      <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {items?.map((item) => (
-          <div
-            key={item.id}
-            className="border border-gray rounded py-2 px-4 flex justify-between items-center"
-          >
-            <h2>
-              {item.brand} - {item.model}
-            </h2>
-            <div className="flex flex-row items-center gap-2">
-              <EditItem item={item} />
-              <form action={deleteItem}>
-                <input type="hidden" name="id" value={item.id} />
-                <button
-                  type="submit"
-                  className="flex flex-col items-center justify-center hover:text-cyan-500"
-                >
-                  <DeleteIcon />
-                </button>
-              </form>
-            </div>
-          </div>
+          <ItemCard key={item.id} item={item} />
         ))}
       </div>
     </main>

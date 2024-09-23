@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import CreateItemModal from "@/components/CreateItemModal";
 import Header from "@/components/Header";
 import ItemCard from "@/components/ItemCard";
 

@@ -19,7 +19,7 @@ export default function EditItemModal({ item }: EditItemModalProps) {
         onClick={() => setOpen(true)}
         className="flex items-center gap-2 bg-black text-white  hover:bg-white hover:text-black rounded py-1 px-2 text-xs"
       >
-        <EditIcon /> Edit
+        <EditIcon />
       </button>
       <Modal open={open} onClose={() => setOpen(false)} title="Edit Item">
         <EditItemForm item={item} onSubmit={() => setOpen(false)} />

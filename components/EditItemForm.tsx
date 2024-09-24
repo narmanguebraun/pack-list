@@ -3,13 +3,7 @@
 import { useState, useRef } from "react";
 import { updateItem } from "@/actions/actions";
 import Button from "./ui/Button";
-
-export type Item = {
-  id: number;
-  brand: string;
-  model: string;
-  reference: string;
-};
+import { Item } from "@/types";
 
 interface EditItemFormProps {
   item: Item;

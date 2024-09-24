@@ -7,9 +7,9 @@ export function EditIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <title>Edit</title>
       <path d="M12 20h9"></path>
@@ -21,20 +21,19 @@ export function EditIcon() {
 export function DeleteIcon() {
   return (
     <svg
-      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
       width="20"
       height="20"
       viewBox="0 0 24 24"
-      shape-rendering="geometricPrecision"
+      fill="none"
       stroke="currentColor"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="1.5"
     >
       <title>Delete</title>
-      <path d="M21 4H8l-7 8 7 8h13a2 2 0 002-2V6a2 2 0 00-2-2z" />
-      <path d="M18 9l-6 6" />
-      <path d="M12 9l6 6" />
+      <polyline points="3 6 5 6 21 6"></polyline>
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
     </svg>
   );
 }

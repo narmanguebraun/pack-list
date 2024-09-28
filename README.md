@@ -1,11 +1,11 @@
-# GOOD-BAG
+# PACK-LIST
 
-Packing List for vacation Web App.
+Packing List Web App.
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/narmanguebraun/good-bag.git`
-2. Navigate to the project directory: `cd good-bag`
+1. Clone the repository: `git clone https://github.com/narmanguebraun/pack-list.git`
+2. Navigate to the project directory: `cd pack-list`
 3. Install the dependencies: `npm install`
 
 ## Supabase

@@ -1,19 +1,13 @@
 import { deleteItem } from "@/actions/actions";
 import { DeleteIcon } from "@/components/ui/Icons";
+import { Item } from "@/types";
 
 interface DeleteItemProps {
   id: Item["id"];
 }
-
-export type Item = {
-  id: number;
-  brand: string;
-  model: string;
-  reference: string;
-};
-
 export default async function DeleteItem({ id }: DeleteItemProps) {
   return (
+    /* @ts-ignore */
     <form action={deleteItem}>
       <input type="hidden" name="id" value={id} />
       <button

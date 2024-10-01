@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Modal from "@/components/Modal";
-import Button from "@/components/ui/Button";
 import EditItemForm from "./EditItemForm";
 import { EditIcon } from "./ui/Icons";
 import { Item } from "@/types";

@@ -3,6 +3,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import Header from "@/components/Header";
 import ItemCard from "@/components/ItemCard";
+import CreateItemModal from "@/components/CreateItemModal";
 
 export default async function PackList() {
   const cookieStore = cookies();
@@ -19,14 +20,14 @@ export default async function PackList() {
     .order("brand", { ascending: true });
 
   if (error) {
-    console.error("Error fetching items");
+    console.error("Error fetching items", error);
   }
 
   return (
     <main className="min-h-screen max-w-[1440px] m-auto bg-matte">
       <Header />
-
-      <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <CreateItemModal />
+      <div className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-4">
         {items?.map((item) => (
           <ItemCard key={item.id} item={item} />
         ))}

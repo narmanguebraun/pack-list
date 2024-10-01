@@ -16,6 +16,7 @@ export default function EditItemForm({ item, onSubmit }: EditItemFormProps) {
     brand: item.brand,
     model: item.model,
     reference: item.reference,
+    image: item.image_url,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>

@@ -1,7 +1,7 @@
 "use client";
 
 import { createItem } from "@/actions/actions";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Button from "./ui/Button";
 
 interface CreateItemFormProps {
@@ -10,15 +10,20 @@ interface CreateItemFormProps {
 
 export default function CreateItemForm({ onSubmit }: CreateItemFormProps) {
   const ref = useRef<HTMLFormElement>(null);
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleSubmit = async (formData: FormData) => {
+    if (file) {
+      formData.set("image", file);
+    }
+    await createItem(formData);
+    ref.current?.reset();
+    setFile(null);
+    onSubmit?.();
+  };
+
   return (
-    <form
-      ref={ref}
-      action={async (formData) => {
-        ref.current?.reset();
-        await createItem(formData);
-      }}
-      onSubmit={onSubmit}
-    >
+    <form ref={ref} action={handleSubmit}>
       <div className="flex flex-col gap-2">
         <div className="flex flex-col">
           <label htmlFor="brand" className="text-xs mb-2">
@@ -53,6 +58,20 @@ export default function CreateItemForm({ onSubmit }: CreateItemFormProps) {
             type="text"
             id="reference"
             name="reference"
+            required
+          />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="image" className="text-xs mb-2">
+            Upload image
+          </label>
+          <input
+            className="border-b border-b-dark bg-black p-2 font-mono"
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
             required
           />
         </div>

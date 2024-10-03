@@ -12,6 +12,8 @@ interface EditItemFormProps {
 
 export default function EditItemForm({ item, onSubmit }: EditItemFormProps) {
   const ref = useRef<HTMLFormElement>(null);
+  const [file, setFile] = useState<File | null>(null);
+
   const [formData, setFormData] = useState({
     brand: item.brand,
     model: item.model,
@@ -27,7 +29,7 @@ export default function EditItemForm({ item, onSubmit }: EditItemFormProps) {
       ref={ref}
       action={async (formData) => {
         ref.current?.reset();
-        await updateItem(formData);
+        await updateItem(formData, item.id);
       }}
       onSubmit={onSubmit}
     >
@@ -70,6 +72,20 @@ export default function EditItemForm({ item, onSubmit }: EditItemFormProps) {
             name="reference"
             value={formData.reference}
             onChange={handleChange}
+          />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="image" className="text-xs mb-2">
+            Upload image
+          </label>
+          <input
+            className="border-b border-b-dark bg-black p-2 font-mono"
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
+            required
           />
         </div>
         <Button type="submit">Update</Button>

@@ -84,44 +84,98 @@ export async function createItem(formData: FormData) {
 
 /* UPDATE ITEM */
 
-export const updateItem = async (formData: FormData) => {
-  const id = formData.get("id");
-  const brand = formData.get("brand");
-  const model = formData.get("model");
-  const reference = formData.get("reference");
-  const image = formData.get("image");
-
+export async function updateItem(formData: FormData, itemId: string) {
   const cookieStore = cookies();
   const supabase = createServerComponentClient({ cookies: () => cookieStore });
+
   const {
     data: { session },
   } = await supabase.auth.getSession();
   const user = session?.user;
 
   if (!user) {
-    console.error("User is not authenticated within updateItem server action");
-    return;
+    return { error: "User is not authenticated" };
   }
 
-  const { data, error } = await supabase
-    .from("items")
-    .update({
+  const brand = formData.get("brand") as string;
+  const model = formData.get("model") as string;
+  const reference = formData.get("reference") as string;
+  const image = formData.get("image") as File | null;
+
+  if (!brand || !model || !reference) {
+    return { error: "Missing required fields" };
+  }
+
+  try {
+    let imageUrl: string | undefined;
+
+    if (image) {
+      // Generate a unique filename
+      const fileExt = image.name.split(".").pop();
+      const fileName = `${user.id}/${Date.now()}_${Math.random()
+        .toString(36)
+        .substring(2, 15)}.${fileExt}`;
+
+      // Upload new image
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("images")
+        .upload(fileName, image);
+
+      if (uploadError) {
+        throw new Error(`Error uploading image: ${uploadError.message}`);
+      }
+
+      // Get public URL for the new image
+      const { data: publicUrlData } = supabase.storage
+        .from("images")
+        .getPublicUrl(fileName);
+
+      if (!publicUrlData.publicUrl) {
+        throw new Error("Failed to get public URL for uploaded image");
+      }
+
+      imageUrl = publicUrlData.publicUrl;
+    }
+
+    // Update item data
+    const updateData: {
+      brand: string;
+      model: string;
+      reference: string;
+      image_url?: string;
+    } = {
       brand,
       model,
       reference,
-      image,
-    })
-    .match({ id, user_id: user.id });
+    };
 
-  if (error) {
-    console.error("Error updating data", error);
-    return;
+    if (imageUrl) {
+      updateData.image_url = imageUrl;
+    }
+
+    const { data, error: updateError } = await supabase
+      .from("items")
+      .update(updateData)
+      .eq("id", itemId)
+      .eq("user_id", user.id) // Ensure the item belongs to the user
+      .select();
+
+    if (updateError) {
+      throw new Error(`Error updating data: ${updateError.message}`);
+    }
+
+    // Revalidate the pack-list page
+    revalidatePath("/pack-list");
+
+    return { message: "Item updated successfully", data };
+  } catch (error) {
+    console.error("Error in updateItem:", error);
+    return {
+      error:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    };
   }
-
-  revalidatePath("/pack-list");
-
-  return { message: "Success" };
-};
+}
 
 /* DELETE ITEM */
 

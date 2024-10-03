@@ -1,5 +1,5 @@
 import { deleteItem } from "@/actions/actions";
-import { DeleteIcon } from "@/components/ui/Icons";
+import { CloseIcon } from "@/components/ui/Icons";
 import { Item } from "@/types";
 
 interface DeleteItemProps {
@@ -12,9 +12,9 @@ export default async function DeleteItem({ id }: DeleteItemProps) {
       <input type="hidden" name="id" value={id} />
       <button
         type="submit"
-        className="flex items-center gap-2 bg-dark text-white  hover:bg-white hover:text-black rounded py-1 px-2 text-xs"
+        className="flex items-center gap-2 text-white hover:bg-white hover:text-black p-2 text-xs"
       >
-        <DeleteIcon />
+        <CloseIcon aria-label="Delete" />
       </button>
     </form>
   );

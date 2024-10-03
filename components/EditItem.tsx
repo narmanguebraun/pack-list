@@ -17,9 +17,9 @@ export default function EditItem({ item }: EditItemProps) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 bg-dark text-white  hover:bg-white hover:text-black rounded py-1 px-2 text-xs"
+        className="flex items-center gap-2 text-white hover:bg-white hover:text-black p-2 text-xs"
       >
-        <EditIcon />
+        <EditIcon aria-label="Edit" />
       </button>
       <Modal open={open} onClose={() => setOpen(false)} title="Edit Item">
         <EditItemForm item={item} onSubmit={() => setOpen(false)} />

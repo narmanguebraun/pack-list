@@ -40,7 +40,7 @@ export default function EditItemForm({ item, onSubmit }: EditItemFormProps) {
             Brand
           </label>
           <input
-            className="border-b border-b-dark bg-black p-2 font-mono"
+            className="bg-dark p-2 font-mono"
             type="text"
             id="brand"
             name="brand"
@@ -53,7 +53,7 @@ export default function EditItemForm({ item, onSubmit }: EditItemFormProps) {
             Model
           </label>
           <input
-            className="border-b border-b-dark bg-black p-2 font-mono"
+            className="bg-dark p-2 font-mono"
             type="text"
             id="model"
             name="model"
@@ -66,7 +66,7 @@ export default function EditItemForm({ item, onSubmit }: EditItemFormProps) {
             Reference
           </label>
           <input
-            className="border-b border-b-dark bg-black p-2 font-mono"
+            className="bg-dark p-2 font-mono"
             type="text"
             id="reference"
             name="reference"
@@ -79,7 +79,7 @@ export default function EditItemForm({ item, onSubmit }: EditItemFormProps) {
             Upload image
           </label>
           <input
-            className="border-b border-b-dark bg-black p-2 font-mono"
+            className="bg-dark p-2 font-mono"
             type="file"
             id="image"
             name="image"

@@ -9,14 +9,19 @@ interface ItemCardProps {
 
 export default function ItemCard({ item }: ItemCardProps) {
   return (
-    <div className="bg-dark p-4 rounded flex flex-col sm:flex-row gap-4">
-      <div className="w-full sm:w-24 h-24 flex justify-center items-center overflow-hidden">
+    <div className="relative flex flex-row gap-5 bg-matte md:flex-col md:border-0">
+      <div className="absolute right-0 top-0 bg-matte">
+        <DeleteItem id={item.id} />
+        <EditItem item={item} />
+      </div>
+
+      <div className="flex justify-center items-center overflow-hidden h-32 w-32 md:w-full md:h-full">
         {item.image_url ? (
           <Image
             src={item.image_url}
             alt={`${item.model} ${item.brand} ${item.reference}`}
-            width={96}
-            height={96}
+            width={300}
+            height={300}
             className="object-cover w-full h-full"
           />
         ) : (
@@ -25,14 +30,10 @@ export default function ItemCard({ item }: ItemCardProps) {
           </div>
         )}
       </div>
-      <div className="flex-grow">
-        <h1 className="text-lg">{item.model}</h1>
-        <h2 className="text-md">{item.brand}</h2>
-        <p className="text-sm">{item.reference}</p>
-      </div>
-      <div className="flex flex-row items-center justify-end gap-2 mt-2 sm:mt-0">
-        <EditItem item={item} />
-        <DeleteItem id={item.id} />
+      <div className="pt-4 md:pb-5 md:pt-0 md:pl-5 font-mono">
+        <h1>{item.model}</h1>
+        <h2>{item.brand}</h2>
+        <p>{item.reference}</p>
       </div>
     </div>
   );

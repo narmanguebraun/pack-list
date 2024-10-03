@@ -30,7 +30,7 @@ export default function CreateItemForm({ onSubmit }: CreateItemFormProps) {
             Brand
           </label>
           <input
-            className="border-b border-b-dark bg-black p-2 font-mono"
+            className="bg-dark p-2 font-mono"
             type="text"
             id="brand"
             name="brand"
@@ -42,7 +42,7 @@ export default function CreateItemForm({ onSubmit }: CreateItemFormProps) {
             Model
           </label>
           <input
-            className="border-b border-b-dark bg-black p-2 font-mono"
+            className="bg-dark p-2 font-mono"
             type="text"
             id="model"
             name="model"
@@ -54,7 +54,7 @@ export default function CreateItemForm({ onSubmit }: CreateItemFormProps) {
             Reference
           </label>
           <input
-            className="border-b border-b-dark bg-black p-2 font-mono"
+            className="bg-dark p-2 font-mono"
             type="text"
             id="reference"
             name="reference"
@@ -66,7 +66,7 @@ export default function CreateItemForm({ onSubmit }: CreateItemFormProps) {
             Upload image
           </label>
           <input
-            className="border-b border-b-dark bg-black p-2 font-mono"
+            className="bg-dark p-2 font-mono"
             type="file"
             id="image"
             name="image"

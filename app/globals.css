@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply font-sans text-sm leading-6 antialiased bg-black text-white;
+    @apply bg-black font-sans text-sm leading-6 antialiased text-white;
   }
 }

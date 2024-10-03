@@ -15,9 +15,9 @@ export default function Modal({ open, children, title, onClose }: ModalProps) {
         open ? "visible bg-black text-white" : "invisible"
       }`}
     >
-      <div className="m-4 min-h-[300px] w-[600px] rounded-lg border border-dark p-6">
+      <div className="m-5 min-h-[300px] w-[600px] bg-matte p-5">
         <div className="relative flex h-full flex-col justify-between">
-          <h1 className="uppercase mb-8">{title}</h1>
+          <h1 className="uppercase mb-10 font-mono">{title}</h1>
           {children}
           <div className="absolute right-0 top-0">
             <button onClick={onClose}>

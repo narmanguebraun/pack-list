@@ -24,14 +24,17 @@ export default async function PackList() {
   }
 
   return (
-    <main className="min-h-screen max-w-[1440px] m-auto bg-matte">
+    <div className="min-h-screen max-w-[1440px] m-auto">
       <Header />
-      <CreateItemModal />
-      <div className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-4">
-        {items?.map((item) => (
-          <ItemCard key={item.id} item={item} />
-        ))}
-      </div>
-    </main>
+      <main className="p-5">
+        <CreateItemModal />
+
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4 py-5">
+          {items?.map((item) => (
+            <ItemCard key={item.id} item={item} />
+          ))}
+        </div>
+      </main>
+    </div>
   );
 }

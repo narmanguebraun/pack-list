@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Modal from "@/components/Modal";
+import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import CreateItemForm from "@/components/CreateItemForm";
 import { PlusIcon } from "./ui/Icons";

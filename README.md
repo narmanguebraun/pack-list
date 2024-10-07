@@ -15,33 +15,45 @@ Packing List Web App.
 3. Create a new table via SQL Editor.
 
 ```
-create table
+// Create the items table with image_url
+CREATE TABLE
   items (
-    id bigint primary key generated always as identity,
-    user_id uuid references auth.users not null,
-    brand text,
-    model text,
-    reference text,
-    created_at timestamp with time zone default now(),
-    updated_at timestamp with time zone
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id UUID REFERENCES auth.users NOT NULL,
+    brand TEXT,
+    model TEXT,
+    reference_number TEXT,
+    image_url TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE
   );
 
-alter table items enable row level security;
+// Enable row-level security on the items table
+ALTER TABLE items ENABLE ROW LEVEL SECURITY;
 
-create policy "Users can view their own items." on items
-for select using (auth.uid () = user_id);
+// Create policy for users to view their own items
+CREATE POLICY "Users can view their own items." ON items FOR
+SELECT
+  USING (auth.uid () = user_id);
 
-create policy "Users can add new items." on items
-for insert with check (auth.uid () = user_id);
+// Create policy for users to add new items
+CREATE POLICY "Users can add new items." ON items FOR INSERT
+WITH
+  CHECK (auth.uid () = user_id);
 
-create policy "Users can update their own items." on items
-for update using (auth.uid () = user_id);
+// Create policy for users to update their own items
+CREATE POLICY "Users can update their own items." ON items
+FOR UPDATE
+  USING (auth.uid () = user_id);
 
-create policy "Users can delete their own items." on items
-for delete using (auth.uid () = user_id);
+// Create policy for users to delete their own items
+CREATE POLICY "Users can delete their own items." ON items FOR DELETE USING (auth.uid () = user_id);
 ```
 
-4. Create a new `.env.local` file in the root folder, adding Supabase `URL` and `ANON_KEY` credentials.
+4. On storage, create a new bucket `images` to store images.
+   Add to it a new policy, that give users access to own folder for SELECT, INSERT, UPDATE, DELETE.
+
+5. Create a new `.env.local` file in the root folder, adding Supabase `URL` and `ANON_KEY` credentials.
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=<your-project-supabase-url>
